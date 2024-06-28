@@ -20,6 +20,16 @@ const links = [
     link: "/estudantes",
     icone: "groups",
   },
+  {
+    titulo: "Cursos",
+    link: "/estudantes",
+    icone: "book",
+  },
+  {
+    titulo: "Disciplinas",
+    link: "/estudantes",
+    icone: "library_books",
+  },
 
   {
     titulo: "Calendário",
@@ -38,6 +48,11 @@ const linksServices = [
     titulo: "Definições",
     link: "/definicoes",
     icone: "settings",
+  },
+  {
+    titulo: "Localização",
+    link: "/localizacao",
+    icone: "public",
   },
 
   {
