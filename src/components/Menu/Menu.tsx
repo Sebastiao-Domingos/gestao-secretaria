@@ -51,7 +51,7 @@ const linksServices = [
   },
   {
     titulo: "Localização",
-    link: "/localizacao",
+    link: "/localizacao/paises",
     icone: "public",
   },
 
