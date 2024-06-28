@@ -22,12 +22,12 @@ const links = [
   },
   {
     titulo: "Cursos",
-    link: "/estudantes",
+    link: "/cursos",
     icone: "book",
   },
   {
     titulo: "Disciplinas",
-    link: "/estudantes",
+    link: "/disciplinas",
     icone: "library_books",
   },
 
