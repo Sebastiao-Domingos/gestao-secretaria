@@ -1,6 +1,5 @@
 import { ResponseError } from "@/helpers/error";
-import PaisService, { PaisData } from "@/services/localidade/pais";
-import { Axios, AxiosError } from "axios";
+import PaisService from "@/services/localidade/pais";
 import { NextRequest, NextResponse } from "next/server";
 
 async function pegar_dados(request: NextRequest) {

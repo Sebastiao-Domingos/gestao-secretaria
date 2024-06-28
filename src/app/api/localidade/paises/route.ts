@@ -1,6 +1,5 @@
 import { ResponseError } from "@/helpers/error";
 import PaisService, { PaisData } from "@/services/localidade/pais";
-import { Axios, AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 async function cadastrar(request: NextRequest) {
