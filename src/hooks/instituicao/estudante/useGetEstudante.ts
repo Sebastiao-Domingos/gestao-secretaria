@@ -15,3 +15,19 @@ export function useGetEstudantes() {
     result,
   };
 }
+
+export function useGetDataEstudante(id: string) {
+  const controller = new EstudanteController();
+  console.log("hook ", id);
+
+  const { data, ...result } = useQuery({
+    queryKey: ["estudantes"],
+    queryFn: () => controller.pegar_dados(id),
+    placeholderData: keepPreviousData,
+  });
+
+  return {
+    data,
+    result,
+  };
+}

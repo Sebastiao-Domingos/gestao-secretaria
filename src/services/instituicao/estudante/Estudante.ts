@@ -79,6 +79,8 @@ export default class EstudanteService {
    * create
    */
   public async find(id: string) {
+    console.log("service : " + id);
+
     const response = await api
       .get<
         {},

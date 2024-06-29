@@ -72,6 +72,25 @@ class ProfessorController {
 
     return body.response;
   }
+
+  public async pegar_dados(atributo_id: string) {
+    if (atributo_id.trim().length === 0) {
+      throw new Error("id não pode estar vazio");
+    }
+
+    const body = await fetch(`${ProfessorController.url}/data`, {
+      method: "GET",
+      body: JSON.stringify({ id: atributo_id }),
+    });
+
+    if (!body.ok) {
+      throw new Error("Erro ao apagar");
+    }
+
+    const json = await body.json();
+
+    return json.response;
+  }
 }
 
 export default ProfessorController;

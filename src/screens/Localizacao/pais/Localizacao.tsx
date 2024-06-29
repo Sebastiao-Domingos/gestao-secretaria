@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader } from "@/components/Loader";
+import { Loader } from "@/components/Menu/Loader";
 import { Button } from "@/components/buttons/Button";
 import { useGetPais } from "@/hooks/localidade/pais/useGetPais";
 import Link from "next/link";

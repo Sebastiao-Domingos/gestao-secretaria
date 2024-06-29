@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader } from "@/components/Loader";
+import { Loader } from "@/components/Menu/Loader";
 import Link from "next/link";
 import Register from "./Register";
 import Edit from "./Edit";
