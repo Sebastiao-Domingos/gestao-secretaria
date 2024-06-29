@@ -103,7 +103,7 @@ function LinkMenu({ data, ...others }: LinkProps) {
     <Link
       href={data.link}
       className={`p-2 rounded hover:bg-purple-600/10 flex items-center gap-2 ${
-        data.link == path && "bg-purple-600/10 text-purple-600"
+        path.includes(data.link) && "bg-purple-600/10 text-purple-600"
       }`}
     >
       <span className="material-icons text-slate-400">{data.icone}</span>{" "}

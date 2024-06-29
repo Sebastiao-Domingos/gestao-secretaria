@@ -33,7 +33,7 @@ export default function Disciplinas() {
                   href={`${path}/${item.id}}`}
                   className="mr-4 hover:text-purple-600 underline"
                 >
-                  Ver todos os seus municípios
+                  Ver mais...
                 </Link>
 
                 <Edit item={item} />
