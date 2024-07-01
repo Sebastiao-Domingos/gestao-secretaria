@@ -3,6 +3,7 @@ import Footer from "@/components/Footer/Footer";
 import Menu from "@/components/Menu/Menu";
 import MenuVertical from "@/components/Menu/MenuVertical";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React from "react";
 
 const queryClient = new QueryClient();
@@ -15,6 +16,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Screens>{children}</Screens>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

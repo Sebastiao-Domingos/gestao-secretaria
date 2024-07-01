@@ -1,10 +1,8 @@
 "use client";
 
 import { Loader } from "@/components/Menu/Loader";
-import { Button } from "@/components/buttons/Button";
 import { useGetPais } from "@/hooks/localidade/pais/useGetPais";
 import Link from "next/link";
-import { useEffect } from "react";
 import Register from "./Register";
 import Edit from "./Edit";
 
@@ -23,6 +21,8 @@ export default function Localizacao() {
       </div>
       <div className="flex flex-col gap-3 mt-8">
         {result.isSuccess &&
+          data &&
+          data?.length !== 0 &&
           data?.map((pais) => (
             <div
               key={pais.id}
