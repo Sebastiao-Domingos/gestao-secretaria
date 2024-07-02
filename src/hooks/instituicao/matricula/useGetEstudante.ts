@@ -1,12 +1,13 @@
 import EstudanteController from "@/controllers/instituicao/Estudante";
+import MatriculaController from "@/controllers/instituicao/Matricula";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 export function useGetEstudantes() {
-  const controller = new EstudanteController();
+  const controller = new MatriculaController();
 
   const { data, ...result } = useQuery({
-    queryKey: ["estudantes"],
+    queryKey: ["matriculas"],
     queryFn: controller.obter,
     placeholderData: keepPreviousData,
   });

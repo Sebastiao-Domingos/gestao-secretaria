@@ -1,6 +1,12 @@
 import { api } from "@/infra/api";
+import { ProvinciaData } from "../provincia";
 
-export type MunicipioData = { nome: string; id?: string; id_provincia: string };
+export type MunicipioData = {
+  nome: string;
+  id?: string;
+  id_provincia: string;
+  provincia?: ProvinciaData;
+};
 
 export default class MunicipioService {
   private readonly BASE_PATH = "/municipios";

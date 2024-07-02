@@ -1,32 +1,28 @@
 import { api } from "@/infra/api";
-import { Endereco } from "../professor/Professor";
+import { DisciplinaData } from "../disciplina";
 
-export type EstudanteData = {
+export type HorarioData = {
   id?: string;
-  nome: string;
-  email: string;
-  telefone: string;
-  numero_bi: string;
-  id_curso: string;
-  data_nascimento: string;
-  ano_ingresso: number;
-  endereco: Endereco[];
+  hora_inicio: string;
+  hora_final: string;
+  dia_semana: number;
+  sala: number;
+  id_disciplina: string;
+  disciplina?: DisciplinaData;
 };
 
-export default class EstudanteService {
-  private readonly BASE_PATH = "/estudantes";
+export default class HorarioService {
+  private readonly BASE_PATH = "/horarios";
 
   /**
    * create
    */
-  public async create(data: EstudanteData) {
-    data.ano_ingresso = Number(data.ano_ingresso);
-
+  public async create(data: HorarioData) {
     const response = await api
       .post<
         {},
         {
-          data: EstudanteData;
+          data: HorarioData;
         }
       >(this.BASE_PATH, data)
       .then((response) => response.data);
@@ -40,12 +36,12 @@ export default class EstudanteService {
   /**
    * create
    */
-  public async update(data: Partial<EstudanteData>) {
+  public async update(data: Partial<HorarioData>) {
     const response = await api
       .put<
         {},
         {
-          data: EstudanteData;
+          data: HorarioData;
         }
       >(`${this.BASE_PATH}/${data.id!}`, data)
       .then((response) => response.data);
@@ -64,7 +60,7 @@ export default class EstudanteService {
       .get<
         {},
         {
-          data: EstudanteData[];
+          data: HorarioData[];
         }
       >(this.BASE_PATH)
       .then((response) => response.data);
@@ -79,13 +75,11 @@ export default class EstudanteService {
    * create
    */
   public async find(id: string) {
-    console.log("service : " + id);
-
     const response = await api
       .get<
         {},
         {
-          data: EstudanteData;
+          data: HorarioData;
         }
       >(`${this.BASE_PATH}/${id}`)
       .then((response) => response.data);

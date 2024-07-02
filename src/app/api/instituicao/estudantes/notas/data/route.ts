@@ -1,12 +1,10 @@
 import { ResponseError } from "@/helpers/error";
 
-import EstudanteService, {
-  EstudanteData,
-} from "@/services/instituicao/estudante/Estudante";
+import NotaService from "@/services/instituicao/notas/Notas";
 
 import { NextRequest, NextResponse } from "next/server";
 
-const service = new EstudanteService();
+const service = new NotaService();
 
 async function pegar_dado(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");

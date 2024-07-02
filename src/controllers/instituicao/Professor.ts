@@ -78,10 +78,9 @@ class ProfessorController {
       throw new Error("id não pode estar vazio");
     }
 
-    const body = await fetch(`${ProfessorController.url}/data`, {
-      method: "GET",
-      body: JSON.stringify({ id: atributo_id }),
-    });
+    const body = await fetch(
+      `${ProfessorController.url}/data?id=${atributo_id}`
+    );
 
     if (!body.ok) {
       throw new Error("Erro ao apagar");

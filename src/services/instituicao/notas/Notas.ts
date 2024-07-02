@@ -1,32 +1,27 @@
 import { api } from "@/infra/api";
-import { Endereco } from "../professor/Professor";
 
-export type EstudanteData = {
+export type NotaData = {
   id?: string;
-  nome: string;
-  email: string;
-  telefone: string;
-  numero_bi: string;
-  id_curso: string;
-  data_nascimento: string;
-  ano_ingresso: number;
-  endereco: Endereco[];
+  nota_parcelar1: number;
+  nota_parcelar2?: number;
+  nota_exame?: number;
+  situacao: string;
+  id_disciplina: string;
+  id_estudante: string;
 };
 
-export default class EstudanteService {
-  private readonly BASE_PATH = "/estudantes";
+export default class NotaService {
+  private readonly BASE_PATH = "/notas";
 
   /**
    * create
    */
-  public async create(data: EstudanteData) {
-    data.ano_ingresso = Number(data.ano_ingresso);
-
+  public async create(data: NotaData) {
     const response = await api
       .post<
         {},
         {
-          data: EstudanteData;
+          data: NotaData;
         }
       >(this.BASE_PATH, data)
       .then((response) => response.data);
@@ -40,12 +35,12 @@ export default class EstudanteService {
   /**
    * create
    */
-  public async update(data: Partial<EstudanteData>) {
+  public async update(data: Partial<NotaData>) {
     const response = await api
       .put<
         {},
         {
-          data: EstudanteData;
+          data: NotaData;
         }
       >(`${this.BASE_PATH}/${data.id!}`, data)
       .then((response) => response.data);
@@ -64,7 +59,7 @@ export default class EstudanteService {
       .get<
         {},
         {
-          data: EstudanteData[];
+          data: NotaData[];
         }
       >(this.BASE_PATH)
       .then((response) => response.data);
@@ -79,13 +74,11 @@ export default class EstudanteService {
    * create
    */
   public async find(id: string) {
-    console.log("service : " + id);
-
     const response = await api
       .get<
         {},
         {
-          data: EstudanteData;
+          data: NotaData;
         }
       >(`${this.BASE_PATH}/${id}`)
       .then((response) => response.data);

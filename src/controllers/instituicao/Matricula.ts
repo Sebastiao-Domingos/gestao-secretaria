@@ -1,15 +1,15 @@
 import { isEmptyString } from "@/helpers/functions/isEmptyString";
-import { EstudanteData } from "@/services/instituicao/estudante/Estudante";
+import { MatriculaData } from "@/services/instituicao/matricula/Matricula";
 
-class EstudanteController {
-  private static readonly url = "/api/instituicao/estudantes";
+class MatriculaController {
+  private static readonly url = "/api/instituicao/estudantes/matriculas";
 
   /**
    * criar
    */
-  public async criar(data: EstudanteData) {
-    data.data_nascimento += "T00:00:00.000Z";
-    const body = await fetch(EstudanteController.url, {
+  public async criar(data: MatriculaData) {
+    data.data_matricula += "T00:00:00.000Z";
+    const body = await fetch(MatriculaController.url, {
       method: "POST",
       body: JSON.stringify(data),
     });
@@ -25,12 +25,12 @@ class EstudanteController {
   /**
    * actulizar
    */
-  public async actualizar(data: EstudanteData) {
-    if (isEmptyString(data.id!) || isEmptyString(data.nome)) {
+  public async actualizar(data: MatriculaData) {
+    if (isEmptyString(data.id!)) {
       throw new Error("O id e o nome não pode estar vazio");
     }
 
-    const body = await fetch(EstudanteController.url, {
+    const body = await fetch(MatriculaController.url, {
       method: "PUT",
       headers: {},
       body: JSON.stringify(data),
@@ -52,7 +52,7 @@ class EstudanteController {
       throw new Error("id não pode estar vazio");
     }
 
-    const body = await fetch(EstudanteController.url, {
+    const body = await fetch(MatriculaController.url, {
       method: "DELETE",
       body: JSON.stringify({ id: atributo_id }),
     });
@@ -66,13 +66,13 @@ class EstudanteController {
     return json.response;
   }
 
-  public async pegar_dados(atributo_id: string): Promise<EstudanteData> {
+  public async pegar_dados(atributo_id: string): Promise<MatriculaData> {
     if (atributo_id.trim().length === 0) {
       throw new Error("id não pode estar vazio");
     }
 
     const body = await fetch(
-      `${EstudanteController.url}/data?id=${atributo_id}`
+      `${MatriculaController.url}/data?id=${atributo_id}`
     );
     if (!body.ok) {
       throw new Error("Erro ao apagar");
@@ -85,11 +85,11 @@ class EstudanteController {
   /**
    * obter
    */
-  public async obter(): Promise<EstudanteData[]> {
-    const body = await fetch(EstudanteController.url).then((res) => res.json());
+  public async obter(): Promise<MatriculaData[]> {
+    const body = await fetch(MatriculaController.url).then((res) => res.json());
 
     return body.response;
   }
 }
 
-export default EstudanteController;
+export default MatriculaController;

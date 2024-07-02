@@ -1,12 +1,11 @@
-import EstudanteController from "@/controllers/instituicao/Estudante";
+import HorarioController from "@/controllers/instituicao/Horario";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 
-export function useGetEstudantes() {
-  const controller = new EstudanteController();
+export function useGetHorario() {
+  const controller = new HorarioController();
 
   const { data, ...result } = useQuery({
-    queryKey: ["estudantes"],
+    queryKey: ["horarios"],
     queryFn: controller.obter,
     placeholderData: keepPreviousData,
   });
