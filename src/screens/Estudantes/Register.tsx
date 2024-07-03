@@ -23,7 +23,7 @@ export default function Register() {
   const { data: cursos, result: result_cursors } = useGetCursos();
 
   const onSubmit = (data: EstudanteData) => {
-    data.enderecos = [endereco];
+    data.endereco = [endereco];
     create.mutate(data);
   };
 

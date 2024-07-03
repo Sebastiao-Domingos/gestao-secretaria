@@ -26,14 +26,14 @@ export default function Estudante({
           <h3 className="font-bold uppercase mr-2">Estudantes</h3>
         </div>
         <div>
-          <Register />
+          <Register id_estudante={params.estudante} />
         </div>
       </div>
       <div className="flex flex-col gap-3 mt-8">
         {result.isSuccess && data && (
           <div>
-            <div className="space-y-6">
-              <fieldset className="p-2 rounded border">
+            <div className="flex justify-between">
+              <fieldset className="p-2 rounded border w-[46%]">
                 <legend className="px-2">Dados Pessoal</legend>
                 <ul className="flex flex-col gap3">
                   <li className="py-1">
@@ -69,7 +69,7 @@ export default function Estudante({
                 </ul>
               </fieldset>
 
-              <fieldset className="p-2 rounded border">
+              <fieldset className="p-2 rounded border w-[48%]">
                 <legend className="px-2">Endereços</legend>
                 <ul className="flex flex-col gap3">
                   <li className="py-1">

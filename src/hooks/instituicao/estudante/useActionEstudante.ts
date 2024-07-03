@@ -1,7 +1,5 @@
-import DisciplinaController from "@/controllers/instituicao/Disciplina";
+
 import EstudanteController from "@/controllers/instituicao/Estudante";
-import PaisController from "@/controllers/localidade/Pais";
-import ProvinciaController from "@/controllers/localidade/Provincia";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const controller = new EstudanteController();

@@ -1,29 +1,21 @@
 import Toast from "@/components/Toast";
 import { Button } from "@/components/buttons/Button";
 import { CloseButton } from "@/components/buttons/CloseButton";
-import { useGetCursos } from "@/hooks/instituicao/curso/useGetCurso";
-import { useActionEstudante } from "@/hooks/instituicao/estudante/useActionEstudante";
-import { useActionProfessor } from "@/hooks/instituicao/professor/useActionProfessor";
-import { useGetMunicipios } from "@/hooks/localidade/municipios/useGetMunicipio";
-import { EstudanteData } from "@/services/instituicao/estudante/Estudante";
-import { Endereco } from "@/services/instituicao/professor/Professor";
+import { useGetDisciplinas } from "@/hooks/instituicao/disciplina/useGetDisciplina";
+import { useActionMatricula } from "@/hooks/instituicao/matricula/useActionEstudante";
+import { MatriculaData } from "@/services/instituicao/matricula/Matricula";
 import * as Dialog from "@radix-ui/react-dialog";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function Register() {
-  const { register, handleSubmit } = useForm<EstudanteData>();
-  const [endereco, setEndereco] = useState<Endereco>({
-    distrito: "",
-    id_municipio: "",
-    rua: "",
-  });
-  const { create } = useActionEstudante();
-  const { data, result } = useGetMunicipios();
-  const { data: cursos, result: result_cursors } = useGetCursos();
+export default function Register({ id_estudante }: { id_estudante: string }) {
+  const { register, handleSubmit } = useForm<MatriculaData>();
 
-  const onSubmit = (data: EstudanteData) => {
-    data.enderecos = [endereco];
+  const { create } = useActionMatricula();
+  const { data, result } = useGetDisciplinas();
+
+  const onSubmit = (data: MatriculaData) => {
+    data.status = "ativo";
+    data.id_estudante = id_estudante;
     create.mutate(data);
   };
 
@@ -37,172 +29,52 @@ export default function Register() {
           <Dialog.Overlay className="fixed top-0 left-0 right-0 bottom-0 bg-black/20" />
           <Dialog.Content className="w-[500px] min-h-[240px] max-h-[80vh] p-4 rounded bg-white fixed top-1/2 left-1/2  -translate-x-[50%] -translate-y-[50%]">
             <div className="flex justify-between items-center border-b pb-2">
-              <h2 className="font-bold text-purple-600">Adicionar estudante</h2>
+              <h2 className="font-bold text-purple-600">Matricular</h2>
 
               <Dialog.Close asChild>
                 <CloseButton />
               </Dialog.Close>
             </div>
-            <div className="mt-6 overflow-auto h-[65vh] pb-[70px]">
+            <div className="mt-6 overflow-auto h-[250px] pb-[70px]">
               <form
                 action=""
                 onSubmit={handleSubmit(onSubmit)}
                 className="space-y-4"
               >
-                <fieldset
-                  className="space-y-3 border p-2 rounded"
-                  disabled={create.isPending}
-                >
-                  <legend className="mx-1">Dados da instituição</legend>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="nome">Ano de ingresso</label>
-                    <input
-                      type="number"
-                      {...register("ano_ingresso", { required: true })}
-                      placeholder="Ano que ingressou"
-                      className="border p-2 rounded outline-none focus:border-purple-300"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="pais">Selecionar o curso</label>
-                    <select
-                      id="pais"
-                      {...register("id_curso", { required: true })}
-                      className="border p-2 rounded outline-none focus:border-purple-300"
-                    >
-                      {result_cursors.isSuccess &&
-                        cursos?.map((pais) => (
-                          <option value={pais.id!} key={pais.id!}>
-                            {pais.nome}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-                </fieldset>
-                <fieldset
-                  className="space-y-3 border p-2 rounded"
-                  disabled={create.isPending}
-                >
-                  <legend className="mx-1">Dados pessoal</legend>
-
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="nome">Nome</label>
-                    <input
-                      type="text"
-                      {...register("nome", { required: true })}
-                      placeholder="Nome do estudante"
-                      className="border p-2 rounded outline-none focus:border-purple-300"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="nome">E-mail</label>
-                    <input
-                      type="text"
-                      {...register("email", { required: true })}
-                      placeholder="exemplo@gmail.com"
-                      className="border p-2 rounded outline-none focus:border-purple-300"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="nome">Nº telefone</label>
-                    <input
-                      type="text"
-                      {...register("telefone", { required: true })}
-                      placeholder="Número de telefone"
-                      className="border p-2 rounded outline-none focus:border-purple-300"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="nome">Data de nascimento</label>
-                    <input
-                      type="date"
-                      {...register("data_nascimento", { required: true })}
-                      placeholder="Número de telefone"
-                      className="border p-2 rounded outline-none focus:border-purple-300"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="codigo">Nº de BI</label>
-                    <input
-                      type="text"
-                      id="codigo"
-                      {...register("numero_bi", { required: true })}
-                      placeholder="Número de BI"
-                      className="border p-2 rounded outline-none focus:border-purple-300"
-                    />
-                  </div>
-                </fieldset>
-                <fieldset
-                  className="space-y-3 border p-2 rounded"
-                  disabled={create.isPending}
-                >
-                  <legend className="mx-1">Localização</legend>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="pais">Selecionar o município</label>
-                    <select
-                      id="pais"
-                      value={endereco?.id_municipio}
-                      required
-                      onChange={(e) =>
-                        setEndereco((prev) => ({
-                          ...prev,
-                          id_municipio: e.target.value,
-                        }))
-                      }
-                      className="border p-2 rounded outline-none focus:border-purple-300"
-                    >
-                      {result.isSuccess &&
-                        data?.map((pais) => (
-                          <option value={pais.id!} key={pais.id!}>
-                            {pais.nome}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="distrito">Distrito</label>
-                    <input
-                      type="text"
-                      value={endereco?.distrito}
-                      onChange={(e) =>
-                        setEndereco((prev) => ({
-                          ...prev,
-                          distrito: e.target.value,
-                        }))
-                      }
-                      required
-                      placeholder="Nome da distrito"
-                      className="border p-2 rounded outline-none focus:border-purple-300"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="rua">Rua</label>
-                    <input
-                      type="text"
-                      id="rua"
-                      value={endereco?.rua}
-                      onChange={(e) =>
-                        setEndereco((prev) => ({
-                          ...prev,
-                          rua: e.target.value,
-                        }))
-                      }
-                      required
-                      placeholder="nome da rua"
-                      className="border p-2 rounded outline-none focus:border-purple-300"
-                    />
-                  </div>
-                  <div className="fixed bottom-0 left-0 right-0 py-5 bg-white rounded-b px-4">
-                    <Button className="w-full">
-                      {create.isPending && (
-                        <span className="material-icons animate-spin !text-white">
-                          cached
-                        </span>
-                      )}
-                      {!create.isPending && "Adicionar"}
-                    </Button>
-                  </div>
-                </fieldset>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="pais">Selecionar o disciplina</label>
+                  <select
+                    id="pais"
+                    {...register("id_disciplina", { required: true })}
+                    className="border p-2 rounded outline-none focus:border-purple-300"
+                  >
+                    {result.isSuccess &&
+                      data?.map((pais) => (
+                        <option value={pais.id!} key={pais.id!}>
+                          {pais.nome}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="data">Data da matrícula</label>
+                  <input
+                    type="date"
+                    {...register("data_matricula")}
+                    id="data"
+                    className="border p-2 rounded outline-none focus:border-purple-300"
+                  />
+                </div>
+                <div className="fixed bottom-0 left-0 right-0 py-5 bg-white rounded-b px-4">
+                  <Button className="w-full">
+                    {create.isPending && (
+                      <span className="material-icons animate-spin !text-white">
+                        cached
+                      </span>
+                    )}
+                    {!create.isPending && "Adicionar"}
+                  </Button>
+                </div>
               </form>
             </div>
           </Dialog.Content>
