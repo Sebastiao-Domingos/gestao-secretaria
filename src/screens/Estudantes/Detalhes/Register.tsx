@@ -22,8 +22,8 @@ export default function Register({ id_estudante }: { id_estudante: string }) {
   return (
     <>
       <Dialog.Root>
-        <Dialog.Trigger asChild>
-          <Button>Matricular</Button>
+        <Dialog.Trigger className="p-2 rounded bg-purple-300 hover:bg-purple-300/50 active:bg-purple-300/70">
+          Matricular
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed top-0 left-0 right-0 bottom-0 bg-black/20" />

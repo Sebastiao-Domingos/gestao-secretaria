@@ -32,8 +32,8 @@ const links = [
   },
 
   {
-    titulo: "Calendário",
-    link: "/calendaria",
+    titulo: "Horário",
+    link: "/horario",
     icone: "calendar_month",
   },
 ];

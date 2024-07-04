@@ -23,7 +23,7 @@ export default function MenuVertical() {
           <button className="p-1 flex justify-start gap-1 items-start hover:bg-purple-600/5 rounded">
             <span className="flex flex-col justify-start">
               <span className="text-[12px] text-purple-400">
-                Sebastiao Afonso
+                Sebastiao Viegas
               </span>
               <span className="text-[10px] text-left pl-4 text-slate-400">
                 Admin

@@ -1,12 +1,9 @@
 "use client";
 
 import { Loader } from "@/components/Menu/Loader";
-import { useRouter } from "next/navigation";
 
 import Register from "./Register";
 import { useGetDataEstudante } from "@/hooks/instituicao/estudante/useGetData";
-import { useEffect, useState } from "react";
-import { EstudanteData } from "@/services/instituicao/estudante/Estudante";
 
 export default function Estudante({
   params,
@@ -14,10 +11,6 @@ export default function Estudante({
   params: { estudante: string };
 }) {
   const { data, result } = useGetDataEstudante(params.estudante);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <div>
