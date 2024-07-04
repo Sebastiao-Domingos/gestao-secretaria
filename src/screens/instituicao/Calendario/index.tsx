@@ -4,12 +4,12 @@ import { Loader } from "@/components/Menu/Loader";
 import Link from "next/link";
 import Register from "./Register";
 import { usePathname } from "next/navigation";
-import { useGetCursos } from "@/hooks/instituicao/curso/useGetCurso";
 import Edit from "./Edit";
+import { useGetHorario } from "@/hooks/instituicao/horario/useGetEstudante";
 
 export default function Calendarios() {
   const path = usePathname();
-  const { data, result } = useGetCursos();
+  const { data, result } = useGetHorario();
   return (
     <div>
       <div className="w-full flex justify-between items-center">
@@ -27,7 +27,7 @@ export default function Calendarios() {
               key={item.id}
               className="border hover:border-purple-200 hover:bg-purple-50/50 p-3 rounded flex justify-between items-center"
             >
-              <div>{item.nome}</div>
+              <div>{item.sala}</div>
               <div className="space-x-4">
                 <Link
                   href={`${path}/${item.id}}`}

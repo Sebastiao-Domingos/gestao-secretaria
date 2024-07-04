@@ -8,6 +8,8 @@ class HorarioController {
    * criar
    */
   public async criar(data: HorarioData) {
+    data.dia_semana = Number(data.dia_semana);
+    data.sala = Number(data.sala);
     const body = await fetch(HorarioController.url, {
       method: "POST",
       body: JSON.stringify(data),
